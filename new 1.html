@@ -1,0 +1,261 @@
+<html>
+
+    <head>
+
+        <style>
+
+            button {
+
+                border-radius: 10px;
+
+                box-shadow: 10px 10px 5px lightblue;
+
+                margin-top: 70px;
+
+                background: linear-gradient(green,white);
+
+            }
+
+            body {
+
+                background-image: url("https://thumbs.dreamstime.com/b/flowing-music-notes-10458400.jpg");
+
+               
+
+            }
+
+        </style>
+
+    </head>
+
+   
+
+    <body>
+
+        <center style="color: white;">
+
+        <h1>5. Drum Kit
+
+            Implement the JavaScript code so that you can play the drums by pressing specific keys in the browser.
+
+           
+
+        </h1>
+
+        <h1 style="color: aqua;">Alert Tones</h1>
+
+          <div class="drum-kit-wrapper">
+
+            <img id="crash-ride" class="crash-cymbal" >
+
+            <img id="hihat-top" class="hihat-top-cymbal" >
+
+            <div data-key="65" class="key kick">
+
+              <kbd></kbd>
+
+            </div>
+
+            <div data-key="66" class="key kick2">
+
+              <kbd></kbd>
+
+            </div>
+
+            <div data-key="67" class="key tom-high">
+
+              <kbd></kbd>
+
+            </div>
+
+            <div data-key="68" class="key tom-mid">
+
+              <kbd></kbd>
+
+            </div>
+
+            <div data-key="69" class="key tom-mid1">
+
+                <kbd></kbd>
+
+            </div>
+
+            <div data-key="70" class="key tom-mid2">
+
+                <kbd></kbd>
+
+            </div>
+
+            <div data-key="71" class="key tom-mid3">
+
+                <kbd></kbd>
+
+            </div>
+
+      </main>
+
+      <audio data-key="66" src="dog.mp3"></audio>
+
+      <audio data-key="65" src="dog.mp3"></audio>
+
+      <audio data-key="67" src="dog.mp3"></audio>
+
+      <audio data-key="68" src="dog.mp3"></audio>
+
+      <audio data-key="69" src="dog.mp3"></audio>
+
+      <audio data-key="70" src="dog.mp3"></audio>
+
+      <audio data-key="71" src="dog.mp3"></audio>
+
+      <div class="Drum">
+
+<button style="font-size: 30px;" type="button">A <p style="font-size: 10px;">Tring Sound</p> </button> &nbsp;&nbsp;&nbsp;&nbsp;
+
+<button style="font-size: 30px;" type="button">B<p style="font-size: 10px;">Coin Sound</p> </button> &nbsp;&nbsp;&nbsp;&nbsp;
+
+<button style="font-size: 30px;"  type="button">C<p style="font-size: 10px;">Clips Sound</p> </button> &nbsp;&nbsp;&nbsp;&nbsp;
+
+<button style="font-size: 30px;"  type="button">D<p style="font-size: 10px;">Door Sound</p> </button> <br> <br>
+
+<button style="font-size: 30px;"  type="button">E<p style="font-size: 10px;">Facebook Sound</p> </button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<button style="font-size: 30px;"  type="button">F<p style="font-size: 10px;">Notification Sound</p> </button>&nbsp;&nbsp;&nbsp;&nbsp;
+
+<button style="font-size: 30px;"  type="button">G<p style="font-size: 10px;">Bell Sound</p> </button>
+
+      </div></center>
+
+</body>
+
+<script>  
+
+{
+
+    const playingClass = 'playing',
+
+        crashRide = document.getElementById('crash-ride'),
+
+        hiHatTop = document.getElementById('hihat-top');
+
+
+ 
+
+    const animateCrashOrRide = () => {
+
+        crashRide.style.transform = 'rotate(0deg) scale(1.5)';
+
+    };
+
+
+ 
+
+    const animateHiHatClosed = () => {
+
+        hiHatTop.style.top = '171px';
+
+    };
+
+
+ 
+
+    const playSound = e => {
+
+        const keyCode = e.keyCode,
+
+            keyElement = document.querySelector(`div[data-key="${keyCode}"]`);
+
+
+ 
+
+        if(!keyElement) return;
+
+
+ 
+
+        const audioElement = document.querySelector(`audio[data-key="${keyCode}"]`);
+
+        audioElement.currentTime = 0;
+
+        audioElement.play();
+
+
+ 
+
+        keyElement.classList.add(playingClass);
+
+    };
+
+
+ 
+
+    const removeCrashRideTransition = e => {
+
+        if(e.propertyName !== 'transform') return;
+
+
+ 
+
+        e.target.style.transform = 'rotate(-7.2deg) scale(1.5)';
+
+    };
+
+
+ 
+
+    const removeHiHatTopTransition = e => {
+
+        if(e.propertyName !== 'top') return;
+
+
+ 
+
+        e.target.style.top = '166px';
+
+    };  
+
+
+ 
+
+    const removeKeyTransition = e => {
+
+        if(e.propertyName !== 'transform') return;
+
+
+ 
+
+        e.target.classList.remove(playingClass)
+
+    };
+
+
+ 
+
+    const drumKeys = Array.from(document.querySelectorAll('.key'));
+
+
+ 
+
+    drumKeys.forEach(key => {
+
+        key.addEventListener('transitionend', removeKeyTransition);
+
+    });
+
+
+ 
+
+    crashRide.addEventListener('transitionend', removeCrashRideTransition);
+
+    hiHatTop.addEventListener('transitionend', removeHiHatTopTransition);
+
+
+ 
+
+    window.addEventListener('keydown', playSound);
+
+}
+
+</script>
+
+</html>

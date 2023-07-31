@@ -1,0 +1,15 @@
+use jquery to select body element use .css() function to style body give it a red background and blue text in html,css.js
+
+$('body').css $(document).ready() function
+
+
+
+use jquery select body element use .html() function to change body text .replace dom with new one . we can completely rewrite our page in html,css,js
+
+use query select the body element use .append() function to a new hyperlink use .attr() function to set an href attribute on hyperlink .ope it in dom and check its clickable .we can add elements to our dom in html,fullcss,js
+
+create a web page with half dozen paragraph on it. add a click  handler. when you click a paragraph it goes red in html ,css,js 
+
+create text input field listen for keyup event.alert value of the text box whenever keyup occurs.get value of input field using $('input').val(); for bonus point append the value of text box into div in html,full css,js
+
+review list of events on: http://api.jquery.com/category/events/ create that listens  for a hover event. when user rolls over a div place the word "out" in the div . count total number of rollovers and output that in a div in html,fullcss and js 

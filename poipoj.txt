@@ -1,0 +1,8 @@
+SELECT s.rev_stars,r.rev_name from reviewer r,rating s
+where s.rev_stars>=7;
+
+
+select dir_fname,dir_lname from director where dir_id in (select dir_id from movie_direction where mov_id in (select mov_id from movie_cast where role = any(select role from movie_cast where mov_id in (select mov_id from movie where mov_title='Eyes Wide Shut')));
+
+
+SELECT * from actor where act_id  in(select act_id from movie_cast where mov_id in (select mov_id from movie where mov_title='Annie Hall'));

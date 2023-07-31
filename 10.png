@@ -1,0 +1,162 @@
+
+  <div class="container">
+    <div class="content">
+      <h2>Add a New Dance Class</h2>
+      <form method="POST" action="gggg.php">
+        <label for="instructor">Instructor:</label>
+        <input type="text" id="instructor" name="instructor" required><br>
+
+        <label for="danceStyle">Dance Style:</label>
+        <input type="text" id="danceStyle" name="danceStyle" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <input type="submit" name="submit" value="Submit">
+      </form>
+
+      <h2>Update Dance Class</h2>
+      <form method="POST" action="dance_class.php">
+        <label for="classId">Class ID:</label>
+        <input type="number" id="classId" name="classId" required><br>
+
+        <label for="instructor">Instructor:</label>
+        <input type="text" id="instructor" name="instructor" required><br>
+
+        <label for="danceStyle">Dance Style:</label>
+        <input type="text" id="danceStyle" name="danceStyle" required><br>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea><br>
+
+        <input type="submit" name="update" value="Update">
+      </form>
+    </div>
+
+    <div class="content">
+      <h2>Dance Classes</h2>
+      <?php
+        // Database configuration
+        $host = "localhost";
+        $username = "root";
+        $password = "";
+        $database = "dance_class";
+
+        // Create a database connection
+        $conn = mysqli_connect($host, $username, $password, $database);
+
+        // Check if the connection is successful
+        if (!$conn) {
+          die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // Insert data into the database
+        if (isset($_POST['submit'])) {
+          $instructor = $_POST['instructor'];
+          $danceStyle = $_POST['danceStyle'];
+          $description = $_POST['description'];
+
+          $sql = "INSERT INTO classes (instructor, dance_style, description) VALUES ('$instructor', '$danceStyle', '$description')";
+
+          if (mysqli_query($conn, $sql)) {
+            echo "New record created successfully.";
+          } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          }
+        }
+
+        // Update data in the database
+        if (isset($_POST['update'])) {
+          $classId = $_POST['classId'];
+          $instructor = $_POST['instructor'];
+          $danceStyle = $_POST['danceStyle'];
+          $description = $_POST['description'];
+
+          $sql = "UPDATE classes SET instructor='$instructor', dance_style='$danceStyle', description='$description' WHERE id=$classId";
+
+          if (mysqli_query($conn, $sql)) {
+            echo "Record updated successfully.";
+          } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          }
+        }
+
+        // Delete data from the database
+        if (isset($_GET['delete'])) {
+          $classId = $_GET['delete'];
+
+          $sql = "DELETE FROM classes WHERE id=$classId";
+
+          if (mysqli_query($conn, $sql)) {
+            echo "Record deleted successfully.";
+          } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+          }
+        }
+
+        // Retrieve and display data from the database
+        $sql = "SELECT * FROM classes";
+        $result = mysqli_query($conn, $sql);
+
+        if (mysqli_num_rows($result) > 0) {
+          echo "<table>";
+          echo "<tr><th>Class ID</th><th>Instructor</th><th>Dance Style</th><th>Description</th><th>Actions</th></tr>";
+
+          while ($row = mysqli_fetch_assoc($result)) {
+            echo "<tr>";
+            echo "<td>".$row['id']."</td>";
+            echo "<td>".$row['instructor']."</td>";
+            echo "<td>".$row['dance_style']."</td>";
+            echo "<td>".$row['description']."</td>";
+            echo "<td><a href='dance_class.php?delete=".$row['id']."'>Delete</a></td>";
+            echo "</tr>";
+          }
+
+          echo "</table>";
+        } else {
+          echo "No records found.";
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+      ?>
+    </div>
+
+
+
+<body style="background:black">
+        <h1>Amin Panel</h1>
+        <input type="checkbox" id="check">
+        <label for="check">
+        <i class="fas fa-bars" id="btn" style="background: #262626;"></i>
+        <i class="fas fa-times" id="cancel" style="background: #262626;"></i></label>
+        <div class="sidebar">
+       
+           <header style="background: #1b1b1b;">My Menu</header> 
+            <a href="#" class="active"><i class="fas fa-home" style="background:black"></i><span style="background:black">Home</span> </a>
+            
+            <a href="http://localhost/Main%20Project/admin/add-classes.php" target="_self"><i class="fas fa-cogs"></i><span>Classes</span> </a>
+                
+            <a href="teachers.php"><i class="fas fa-users"></i> <span>Teachers</span></a>
+
+            <a href="reports.php"><i class="fas fa-clipboard"></i> <span>Reports</span></a>
+
+            <a href="maininvoice.php"><i class="	fas fa-file-alt"></i> <span>Invoice</span></a>
+           </div>
+
+
+
+
+1.select sum(bkprice) from catalog.
+2.select b.title from catalog b inner join author a on a.aid = b.aid  inner join publisher p on p.pid = b.pid where country = "Indian";
+3.SELECT bk_id
+ FROM catalog
+ WHERE price >(SELECT AVG(price) Average_Price FROM catalog);
+4.SELECT p.name
+FROM catalog c inner join publisher p 
+GROUP BY name having max(count(pid));
+
+
+if(isset($_GET["name"]))
+
+
